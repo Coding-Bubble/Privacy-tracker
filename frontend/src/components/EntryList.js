@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const EntryList = () => {
+  const baseUrl = process.env.REACT_APP_API_URL;
   const [entries, setEntry] = useState([]);
 
   useEffect(() => {
@@ -10,13 +11,13 @@ const EntryList = () => {
   }, []);
 
   const getEntries = async () => {
-    const response = await axios.get("http://localhost:5000/entries");
+    const response = await axios.get(`${baseUrl}/entries`);
     setEntry(response.data);
   };
 
   const deleteEntry = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/entries/${id}`);
+      await axios.delete(`${baseUrl}/entries/${id}`);
       getEntries();
     } catch (error) {
       console.log(error);

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditEntry = () => {
+  const baseUrl = process.env.REACT_APP_API_URL;
   const [name, setName] = useState("");
   const [details, setDetail] = useState("");
 
@@ -14,7 +15,7 @@ const EditEntry = () => {
   }, []);
 
   const getEntryById = async () => {
-    const response = await axios.get(`http://localhost:5000/entries/${id}`);
+    const response = await axios.get(`${baseUrl}/entries/${id}`);
     setName(response.data.name);
     setDetail(response.data.details);
   };
@@ -22,7 +23,7 @@ const EditEntry = () => {
   const updateEntry = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://localhost:5000/entries/${id}`, {
+      await axios.patch(`${baseUrl}/entries/${id}`, {
         name,
         details,
       });
