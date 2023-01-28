@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const AddEntry = () => {
+  const baseUrl = process.env.REACT_APP_API_URL;
   const [name, setName] = useState("");
   const [details, setDetail] = useState("");
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const AddEntry = () => {
   const saveEntry = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/entries", {
+      await axios.post(`${baseUrl}/entries`, {
         name,
         details,
       });
